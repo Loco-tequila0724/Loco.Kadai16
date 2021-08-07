@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		3831F2E926BE3E5300220372 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2E826BE3E5300220372 /* AppDelegate.swift */; };
 		3831F2EB26BE3E5300220372 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2EA26BE3E5300220372 /* SceneDelegate.swift */; };
-		3831F2ED26BE3E5300220372 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2EC26BE3E5300220372 /* ViewController.swift */; };
+		3831F2ED26BE3E5300220372 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2EC26BE3E5300220372 /* MainViewController.swift */; };
 		3831F2F026BE3E5300220372 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3831F2EE26BE3E5300220372 /* Main.storyboard */; };
 		3831F2F226BE3E5500220372 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3831F2F126BE3E5500220372 /* Assets.xcassets */; };
 		3831F2F526BE3E5500220372 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3831F2F326BE3E5500220372 /* LaunchScreen.storyboard */; };
+		3831F2FD26BE3EBC00220372 /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2FC26BE3EBC00220372 /* InputTextViewController.swift */; };
+		3831F2FF26BE3EE400220372 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831F2FE26BE3EE400220372 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3831F2E526BE3E5300220372 /* Loco.Kadai16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loco.Kadai16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3831F2E826BE3E5300220372 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3831F2EA26BE3E5300220372 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3831F2EC26BE3E5300220372 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3831F2EC26BE3E5300220372 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3831F2EF26BE3E5300220372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3831F2F126BE3E5500220372 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3831F2F426BE3E5500220372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3831F2F626BE3E5500220372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3831F2FC26BE3EBC00220372 /* InputTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
+		3831F2FE26BE3EE400220372 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				3831F2E826BE3E5300220372 /* AppDelegate.swift */,
 				3831F2EA26BE3E5300220372 /* SceneDelegate.swift */,
-				3831F2EC26BE3E5300220372 /* ViewController.swift */,
+				3831F2FE26BE3EE400220372 /* CustomTableViewCell.swift */,
+				3831F2FC26BE3EBC00220372 /* InputTextViewController.swift */,
+				3831F2EC26BE3E5300220372 /* MainViewController.swift */,
 				3831F2EE26BE3E5300220372 /* Main.storyboard */,
 				3831F2F126BE3E5500220372 /* Assets.xcassets */,
 				3831F2F326BE3E5500220372 /* LaunchScreen.storyboard */,
@@ -77,6 +83,7 @@
 				3831F2E126BE3E5300220372 /* Sources */,
 				3831F2E226BE3E5300220372 /* Frameworks */,
 				3831F2E326BE3E5300220372 /* Resources */,
+				38DE65E526BE3FFA00171DDA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -132,12 +139,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		38DE65E526BE3FFA00171DDA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3831F2E126BE3E5300220372 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3831F2ED26BE3E5300220372 /* ViewController.swift in Sources */,
+				3831F2FD26BE3EBC00220372 /* InputTextViewController.swift in Sources */,
+				3831F2FF26BE3EE400220372 /* CustomTableViewCell.swift in Sources */,
+				3831F2ED26BE3E5300220372 /* MainViewController.swift in Sources */,
 				3831F2E926BE3E5300220372 /* AppDelegate.swift in Sources */,
 				3831F2EB26BE3E5300220372 /* SceneDelegate.swift in Sources */,
 			);
