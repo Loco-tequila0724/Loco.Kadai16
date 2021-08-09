@@ -1,26 +1,33 @@
 import UIKit
 
-protocol InputTextDelegate: AnyObject {
+protocol InputTextViewControllerDelegate: AnyObject {
     func saveAddAndReturn(fruitsName: String)
     func saveEditAndReturn(fruitsName: String)
 }
 
 class InputTextViewController: UIViewController {
-    enum Mode: String {
+    enum Mode {
         case add
-        case edit
+        case edit(CheckItem)
     }
 
     @IBOutlet private weak var inputTextField: UITextField!
 
-    var nameText = ""
     var mode: Mode?
 
-    weak var delegate: InputTextDelegate?
+    weak var delegate: InputTextViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputTextField.text = nameText
+
+        switch mode {
+        case .add:
+            break
+        case .edit(let item):
+            inputTextField.text = item.name
+        case nil:
+            fatalError()
+        }
     }
 
     private func presentAlert(message: String) {
@@ -51,7 +58,7 @@ class InputTextViewController: UIViewController {
         case .edit:
             delegate?.saveEditAndReturn(fruitsName: inputText)
         default:
-            break
+            fatalError()
         }
     }
 }
