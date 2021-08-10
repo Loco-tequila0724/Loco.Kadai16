@@ -8,7 +8,7 @@ struct CheckItem {
 class MainViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
-    private var indexPathNumber: Int?
+    private var tappedRow: Int?
 
     private var checkItems: [CheckItem] =
         [
@@ -26,21 +26,16 @@ class MainViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
+        guard let navigationController = segue.destination as? UINavigationController, let inputTextVC = navigationController.topViewController as? InputTextViewController else { return }
+
+        inputTextVC.delegate = self
 
         switch identifier {
         case "addSegue":
-            guard let navigationController = segue.destination as? UINavigationController, let inputTextVC = navigationController.topViewController as? InputTextViewController else { return }
-            inputTextVC.delegate = self
             inputTextVC.mode = .add
-
         case "editSegue":
-            guard let navigationController = segue.destination as? UINavigationController, let inputTextVC = navigationController.topViewController as? InputTextViewController else { return }
-            inputTextVC.delegate = self
-            inputTextVC.mode = .edit
-
-            if let indexPath = sender as? IndexPath {
-                let itemName = self.checkItems[indexPath.row].name
-                inputTextVC.nameText = itemName
+            if let tappedRow = tappedRow {
+                inputTextVC.mode = .edit(checkItems[tappedRow])
             }
         default:
             break
@@ -56,9 +51,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.cellIdentifier, for: indexPath) as? CustomTableViewCell
-        cell?.configure(item: checkItems[indexPath.row])
-        return cell!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.cellIdentifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        cell.configure(item: checkItems[indexPath.row])
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -67,12 +62,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        indexPathNumber = indexPath.row
+        tappedRow = indexPath.row
         performSegue(withIdentifier: "editSegue", sender: indexPath)
     }
 }
 
-extension MainViewController: InputTextDelegate {
+extension MainViewController: InputTextViewControllerDelegate {
     func saveAddAndReturn(fruitsName: String) {
         checkItems.append(CheckItem(name: fruitsName, isChecked: false))
         dismiss(animated: true, completion: nil)
@@ -80,7 +75,8 @@ extension MainViewController: InputTextDelegate {
     }
 
     func saveEditAndReturn(fruitsName: String) {
-        checkItems[indexPathNumber!].name = fruitsName
+        guard let tappedRow = tappedRow else { return }
+        checkItems[tappedRow].name = fruitsName
         dismiss(animated: true, completion: nil)
         tableView.reloadData()
     }
